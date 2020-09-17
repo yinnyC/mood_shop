@@ -22,3 +22,27 @@ body {
 	padding: 0.5em;
 	text-decoration: none;
 }
+.items {
+	display: grid;
+	grid-template-columns: repeat(4, 120px);
+	grid-column-gap: 200px;
+	margin-left: 100px;
+	margin-top: 50px;
+}
+.item {
+	border: solid 1px;
+	width: 300px;
+	margin-top: 30px;
+	display: flex;
+	flex-direction: column;
+	padding: 0;
+}
+.item > button {
+	border: none;
+	border-radius: 50px;
+	background-color: rgba(49, 209, 196, 0.89);
+	padding: 12px;
+	margin: auto 0 1em 0;
+	align-self: center;
+	justify-self: flex-end;
+}
