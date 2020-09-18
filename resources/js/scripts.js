@@ -35,6 +35,8 @@ data.forEach(function (info, index) {
 const itemList = document.getElementById('item-list');
 const cartQty = document.getElementById('cart-qty');
 const cartTotal = document.getElementById('cart-total');
+const all_items_button = Array.from(document.querySelectorAll('button'));
+console.log(all_items_button);
 const cart = [];
 
 function addItem(name, price) {
@@ -47,7 +49,7 @@ function addItem(name, price) {
 	const item = { name, price, qty: 1 };
 	cart.push(item);
 }
-function showItem() {
+function showItems() {
 	let qtyStr = `<p>You have ${getQty()} items in the cart</p>`;
 	let totalStr = `<p>Total in cart: $${getTotal()}</p>`;
 	let itemStr = '';
@@ -89,15 +91,22 @@ function removeItem(name, qty = 0) {
 	}
 }
 
-addItem('Apple', 0.99);
-addItem('Orange', 1.29);
-addItem('Opinion', 0.02);
-addItem('Apple', 0.99);
-addItem('Frisbee', 9.92);
-addItem('Orange', 1.29);
-addItem('Apple', 0.99);
-addItem('Orange', 1.29);
-showItem();
-removeItem('Frisbee');
-removeItem('Apple', 1);
-showItem();
+all_items_button.forEach((elt) =>
+	elt.addEventListener('click', () => {
+		addItem(elt.getAttribute('id'), elt.getAttribute('data-price'));
+		console.log(elt.getAttribute('data-price'));
+		showItems();
+	})
+);
+// addItem('Apple', 0.99);
+// addItem('Orange', 1.29);
+// addItem('Opinion', 0.02);
+// addItem('Apple', 0.99);
+// addItem('Frisbee', 9.92);
+// addItem('Orange', 1.29);
+// addItem('Apple', 0.99);
+// addItem('Orange', 1.29);
+// showItem();
+// removeItem('Frisbee');
+// removeItem('Apple', 1);
+// showItem();
