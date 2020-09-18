@@ -31,3 +31,18 @@ data.forEach(function (info, index) {
 	newDiv.appendChild(button);
 	itemsContainer.appendChild(newDiv);
 });
+
+const cart = [];
+function addItem(name, price) {
+	const item = { name: name, price: price, qty: 1 };
+	cart.push(item);
+}
+function showItem() {
+	console.log(`You have ${cart.length} items in the cart`);
+}
+
+addItem('apple', 0.99);
+addItem('shoe', 9.99);
+addItem('orange', 2.99);
+addItem('chips', 0.99);
+showItem();

@@ -3,24 +3,43 @@ body {
 	font-size: 16px;
 	line-height: 1.5;
 	margin: 0;
+	width: 100%;
+}
+nav,
+header {
+	overflow: auto;
 }
 .page-header {
 	display: flex;
-	flex-direction: row;
 	justify-content: space-between;
-	background-color: rgba(49, 209, 196, 0.89);
+	align-items: baseline;
+	background-color: rgba(49, 209, 196);
+	position: fixed;
+	top: 0;
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	width: 100%;
+	z-index: 999;
+}
+nav ul,
+.page-header > h4 {
+	margin: 0;
+	color: rgb(34, 34, 34);
+}
+.page-header > h4 {
+	padding-left: 20px;
 }
 .page-header ul {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 	list-style: none;
+	padding-right: 30px;
 }
 .page-header a {
 	display: block;
-	padding: 0.5em;
+	padding: 1em;
 	text-decoration: none;
+	color: rgb(34, 34, 34);
 }
 .items {
 	display: grid;
@@ -37,12 +56,21 @@ body {
 	flex-direction: column;
 	padding: 0;
 }
+.item > p:nth-child(2) {
+	height: 120px;
+	margin: 1.5em 1.5em 0 1.5em;
+	padding: 0;
+}
+.item > p:nth-child(3) {
+	margin: auto 1.5em 1.5em 1.5em;
+	padding: 0;
+}
 .item > button {
 	border: none;
 	border-radius: 50px;
 	background-color: rgba(49, 209, 196, 0.89);
-	padding: 12px;
-	margin: auto 0 1em 0;
+	padding: 1em 1.8em 1em 1.8em;
+	margin: auto 0 2em 0;
 	align-self: center;
 	justify-self: flex-end;
 }
