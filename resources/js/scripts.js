@@ -32,6 +32,9 @@ data.forEach(function (info, index) {
 	itemsContainer.appendChild(newDiv);
 });
 
+const itemList = document.getElementById('item-list');
+const cartQty = document.getElementById('cart-qty');
+const cartTotal = document.getElementById('cart-total');
 const cart = [];
 
 function addItem(name, price) {
@@ -45,12 +48,16 @@ function addItem(name, price) {
 	cart.push(item);
 }
 function showItem() {
-	console.log(`You have ${getQty()} items in the cart`);
-
+	let qtyStr = `<p>You have ${getQty()} items in the cart</p>`;
+	let totalStr = `<p>Total in cart: $${getTotal()}</p>`;
+	let itemStr = '';
 	cart.forEach(function (item, index) {
-		console.log(`--${item.name} $${item.price} x ${item.qty}`);
+		const { name, price, qty } = item;
+		itemStr += `<li>${name} $${price} x ${qty} = ${price * qty}</li>`;
 	});
-	console.log(`Total in cart: $${getTotal()}`);
+	itemList.innerHTML = itemStr;
+	cartQty.innerHTML = qtyStr;
+	cartTotal.innerHTML = totalStr;
 }
 function getQty() {
 	let qty = 0;
