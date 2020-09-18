@@ -39,6 +39,8 @@ const all_items_button = Array.from(document.querySelectorAll('button'));
 console.log(all_items_button);
 const cart = [];
 
+// -------------------------------------------
+// Add Items
 function addItem(name, price) {
 	for (let i = 0; i < cart.length; i++) {
 		if (cart[i].name === name) {
@@ -49,18 +51,27 @@ function addItem(name, price) {
 	const item = { name, price, qty: 1 };
 	cart.push(item);
 }
+// -------------------------------------------
+// Shoe Items
 function showItems() {
 	let qtyStr = `<p>You have ${getQty()} items in the cart</p>`;
 	let totalStr = `<p>Total in cart: $${getTotal()}</p>`;
 	let itemStr = '';
 	cart.forEach(function (item, index) {
 		const { name, price, qty } = item;
-		itemStr += `<li>${name} $${price} x ${qty} = ${price * qty}</li>`;
+		itemStr += `<li>${name} $${price} x ${qty} = ${(price * qty).toFixed(2)} 
+		<button class="remove" data-name="${name}"> Remove </button> 
+		<button class="add-one" data-name="${name}"> + </button>
+		<button class="minus-one" data-name="${name}"> - </button>
+		<input class="update" type=number data-name="${name}"></input>
+		</li>`;
 	});
 	itemList.innerHTML = itemStr;
 	cartQty.innerHTML = qtyStr;
 	cartTotal.innerHTML = totalStr;
 }
+// -------------------------------------------
+// Get Total Quantity
 function getQty() {
 	let qty = 0;
 	cart.forEach(function (item, index) {
@@ -68,6 +79,8 @@ function getQty() {
 	});
 	return qty;
 }
+// -------------------------------------------
+// Get Total Price
 function getTotal() {
 	let total = 0;
 	cart.forEach(function (item, index) {
@@ -75,7 +88,8 @@ function getTotal() {
 	});
 	return total.toFixed(2);
 }
-
+// -------------------------------------------
+// Remove Item
 function removeItem(name, qty = 0) {
 	for (let i = 0; i < cart.length; i++) {
 		if (cart[i].name === name) {
@@ -90,23 +104,55 @@ function removeItem(name, qty = 0) {
 		}
 	}
 }
-
+// -------------------------------------------
+// Update Item
+function updateCart(name, qty) {
+	for (let i = 0; i < cart.length; i++) {
+		if (cart[i].name === name) {
+			if (qty < 1) {
+				removeItem(name);
+				return;
+			}
+			cart[i].qty = qty;
+			showItems();
+			return;
+		}
+	}
+}
+// -------------------------------------------
+// Handle Add to cart buttons
 all_items_button.forEach((elt) =>
 	elt.addEventListener('click', () => {
 		addItem(elt.getAttribute('id'), elt.getAttribute('data-price'));
-		console.log(elt.getAttribute('data-price'));
 		showItems();
 	})
 );
-// addItem('Apple', 0.99);
-// addItem('Orange', 1.29);
-// addItem('Opinion', 0.02);
-// addItem('Apple', 0.99);
-// addItem('Frisbee', 9.92);
-// addItem('Orange', 1.29);
-// addItem('Apple', 0.99);
-// addItem('Orange', 1.29);
-// showItem();
-// removeItem('Frisbee');
-// removeItem('Apple', 1);
-// showItem();
+// -------------------------------------------
+// Handle Change Event on Update Input
+itemList.onchange = function (e) {
+	if (e.target && e.target.classList.contains('update')) {
+		const name = e.target.dataset.name;
+		const qty = parseInt(e.target.value);
+		updateCart(name, qty);
+		showItems();
+	}
+};
+
+// -------------------------------------------
+// Handle clicks on list
+itemList.onclick = function (e) {
+	console.log(e.target.dataset.name);
+	if (e.target && e.target.classList.contains('remove')) {
+		const name = e.target.dataset.name;
+		removeItem(name);
+		showItems();
+	} else if (e.target && e.target.classList.contains('add-one')) {
+		const name = e.target.dataset.name;
+		addItem(name);
+		showItems();
+	} else if (e.target && e.target.classList.contains('minus-one')) {
+		const name = e.target.dataset.name;
+		removeItem(name, 1);
+		showItems();
+	}
+};

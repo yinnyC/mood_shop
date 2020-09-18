@@ -45,8 +45,7 @@ nav ul,
 	display: grid;
 	grid-template-columns: repeat(4, 120px);
 	grid-column-gap: 200px;
-	margin-left: 100px;
-	margin-top: 50px;
+	margin: 70px 10px 0 10px;
 }
 .item {
 	border: solid 1px;
@@ -73,4 +72,51 @@ nav ul,
 	margin: auto 0 2em 0;
 	align-self: center;
 	justify-self: flex-end;
+}
+.item > button:hover {
+	background-color: rgba(248, 193, 54);
+}
+footer {
+	background-color: rgb(248, 193, 54);
+	width: 100%;
+	height: auto; /* Height of the footer */
+	margin: 7 0px 0 -100px 0;
+	font-family: monospace;
+}
+#cart-qty {
+	padding: 10px 0 0 25px;
+	font-weight: bolder;
+}
+footer ul {
+	list-style: none;
+	padding-left: 0;
+}
+#item-list li:nth-child(even) {
+	padding: 5px 0 5px 25px;
+	color: rgb(49, 49, 49);
+	background-color: rgb(220, 221, 220);
+}
+#item-list li:nth-child(odd) {
+	padding: 5px 0 5px 25px;
+	background-color: rgb(49, 49, 49);
+	color: rgb(249, 251, 249);
+}
+#item-list > li {
+	display: flex;
+	justify-content: flex-end;
+}
+#cart-total {
+	text-align: right;
+	font-weight: bolder;
+	text-decoration: underline;
+	padding: 0 10px 10px 0;
+}
+footer button,
+footer input {
+	border: none;
+	border-radius: 10px;
+	font-family: 'Courier New', Courier, monospace;
+	padding: 5px 10px 5px 10px;
+	margin: 0 10px 0 10px;
+	background-color: ivory;
 }
